@@ -752,7 +752,27 @@ body {
 .mobile-menu.open .mobile-cta {
     animation: linkSlide 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0.35s forwards;
 }
-.mobile-cta:hover { background: var(--green); color: #fff; border-color: var(--green); }
+/* Close button inside the mobile overlay */
+.mobile-close {
+    position: absolute;
+    top: 24px;
+    right: 6vw;
+    background: none;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    color: #fff;
+    font-size: 1.1rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease, border-color 0.3s ease;
+    letter-spacing: 0;
+    line-height: 1;
+}
+.mobile-close:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5); }
 
 /* ─────────────────────────────── RESPONSIVE ─────────────────────────────── */
 
@@ -785,9 +805,8 @@ body {
 }
 
 @media (max-width: 600px) {
-    /* Navbar compression for small phones */
-    .navbar { padding: 16px 5vw; flex-direction: column; gap: 12px; }
-    .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
+    /* Navbar stays horizontal — logo left, burger right */
+    .navbar { padding: 16px 5vw; flex-direction: row; justify-content: space-between; align-items: center; }
     .nav-logo img { height: 24px; }
 
     /* Adjust typography */

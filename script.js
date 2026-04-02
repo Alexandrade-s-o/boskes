@@ -260,6 +260,10 @@ function toggleMenu(forceClose = false) {
 if (burgerBtn && mobileMenu) {
     burgerBtn.addEventListener('click', () => toggleMenu());
 
+    // Close button inside the overlay
+    const mobileClose = document.getElementById('mobileClose');
+    if (mobileClose) mobileClose.addEventListener('click', () => toggleMenu(true));
+
     // Close menu + smooth scroll to section on link click
     mobileMenu.querySelectorAll('.mobile-link').forEach(link => {
         link.addEventListener('click', (e) => {
