@@ -1,0 +1,660 @@
+/* ===================================================
+   BOSKES CREATIVE STUDIO — Full Storyscrolling Styles
+   Harvard UX Level Design
+   =================================================== */
+
+:root {
+    --bg: #ffffff;
+    --dark: #111111;
+    --green: #2d5a27;
+    --green-light: #4a8c40;
+    --green-soft: rgba(45, 90, 39, 0.08);
+    --font: 'Montserrat', sans-serif;
+}
+
+/* ── CURSOR GLOW ── */
+.cursor-glow {
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(74,140,64,0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.4s ease;
+    mix-blend-mode: multiply;
+}
+
+/* ── SCROLL PROGRESS BAR ── */
+.scroll-progress {
+    position: fixed;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.scroll-progress-track {
+    width: 1px;
+    height: 120px;
+    background: rgba(0,0,0,0.12);
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-progress-fill {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 0%;
+    background: var(--green);
+    transition: height 0.1s linear;
+}
+
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: auto; /* Lenis handles smooth scroll */
+}
+
+body {
+    background: var(--bg);
+    color: var(--dark);
+    font-family: var(--font);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ─────────────── NAVBAR ─────────────── */
+.navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 7vw;
+    transition: background 0.5s ease, backdrop-filter 0.5s ease, box-shadow 0.5s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+}
+
+.nav-logo img {
+    height: 32px;
+    width: auto;
+    display: block;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+
+.nav-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.navbar.scrolled .nav-links a {
+    color: rgba(0,0,0,0.7);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--green);
+    transition: width 0.35s cubic-bezier(0.2, 1, 0.2, 1);
+}
+
+.nav-links a:hover { color: var(--green); }
+.nav-links a:hover::after { width: 100%; }
+
+/* ─────────────── HERO ─────────────── */
+.scrolly-hero {
+    height: 600vh; /* Extremely long track to accommodate large, separated story beats without clipping */
+    position: relative;
+}
+
+.hero-pinned {
+    height: 100vh;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Deep cinematic vignette around hero edges */
+.hero-pinned::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.55) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.15) 0%, transparent 35%, rgba(0,0,0,0.5) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.content-container {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.frame {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 90%;
+    max-width: 900px;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.hero-logo {
+    width: clamp(200px, 35vw, 480px);
+    height: auto;
+    animation: logoFloat 7s ease-in-out infinite;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.2));
+}
+
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-12px); }
+}
+
+.description {
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.95);
+    letter-spacing: 0.08em;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+}
+
+.scroll-indicator span {
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.mouse {
+    width: 22px;
+    height: 36px;
+    border: 1.5px solid rgba(255,255,255,0.6);
+    border-radius: 11px;
+    display: flex;
+    justify-content: center;
+}
+
+.mouse::before {
+    content: '';
+    width: 3px;
+    height: 6px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 2px;
+    margin-top: 7px;
+    animation: scrollWheel 1.8s infinite cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@keyframes scrollWheel {
+    0%   { transform: translateY(0);    opacity: 1; }
+    50%  { opacity: 1; }
+    100% { transform: translateY(13px); opacity: 0; }
+}
+
+/* ─────────────── SHARED STORY SECTIONS ─────────────── */
+.story-section {
+    position: relative;
+}
+
+.section-label {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.45);
+    border-left: 2px solid var(--green);
+    padding-left: 12px;
+    margin-bottom: 48px;
+}
+
+.section-label--light {
+    color: rgba(255,255,255,0.4);
+    border-left-color: var(--green-light);
+}
+
+/* ─────────────── ABOUT — SPLIT LAYOUT ─────────────── */
+.about-story {
+    height: 200vh; /* Gives scroll room for pin */
+    background: var(--bg);
+}
+
+.story-sticky {
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.split-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+
+.split-text {
+    padding: 80px 7vw;
+    opacity: 0;
+    transform: translateY(60px);
+}
+
+.reveal-text {
+    font-size: clamp(2.2rem, 4vw, 4rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    margin-bottom: 36px;
+    color: var(--dark);
+}
+
+.reveal-text em {
+    font-style: normal;
+    color: var(--green);
+}
+
+.body-text {
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.85;
+    color: rgba(0,0,0,0.65);
+    max-width: 480px;
+}
+
+.body-text strong {
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.split-image {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.image-clip {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.1);
+    clip-path: inset(0 100% 0 0);
+}
+
+/* ─────────────── SERVICIOS — DARK STAGGER ─────────────── */
+.services-story {
+    background: var(--dark);
+    padding: 120px 7vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.services-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.services-stagger {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.service-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 200px;
+    align-items: center;
+    gap: 40px;
+    padding: 40px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    opacity: 0;
+    transform: translateX(-50px);
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.5s ease, padding 0.5s ease;
+    border-radius: 4px;
+}
+
+.service-row:hover {
+    background: rgba(255,255,255,0.03);
+    padding-left: 16px;
+}
+
+.service-row:hover .service-num {
+    color: var(--green-light);
+    transition: color 0.4s ease;
+}
+
+.service-row:first-child {
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.service-num {
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    color: rgba(255,255,255,0.25);
+    font-weight: 500;
+}
+
+.service-content h3 {
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+}
+
+.service-content p {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+    max-width: 500px;
+}
+
+.service-img {
+    width: 200px;
+    height: 120px;
+    border-radius: 3px;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: transform 0.6s cubic-bezier(0.2, 1, 0.2, 1),
+                opacity 0.6s ease;
+    overflow: hidden;
+}
+
+.service-row:hover .service-img {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.service-row:hover .service-content h3 {
+    color: var(--green-light);
+    transition: color 0.3s ease;
+}
+
+/* ─────────────── PORTFOLIO — HORIZONTAL GALLERY ─────────────── */
+.portfolio-story {
+    height: 600vh; /* Long scroll for horizontal gallery */
+    background: var(--bg);
+}
+
+.portfolio-pinned {
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 7vw 40px;
+}
+
+.portfolio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.portfolio-hint {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: rgba(0,0,0,0.3);
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.portfolio-track {
+    display: flex;
+    gap: 24px;
+    will-change: transform;
+}
+
+.portfolio-slide {
+    flex-shrink: 0;
+    width: clamp(260px, 30vw, 380px);
+    cursor: pointer;
+}
+
+.pslide-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background-size: cover;
+    background-position: center;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.8s cubic-bezier(0.2, 1, 0.2, 1);
+}
+
+.portfolio-slide:hover .pslide-img {
+    transform: scale(1.03);
+}
+
+.pslide-info {
+    padding: 16px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.pslide-num {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    color: rgba(0,0,0,0.3);
+    font-weight: 500;
+}
+
+.pslide-info h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--dark);
+}
+
+.pslide-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 600;
+}
+
+/* ─────────────── STATEMENT ─────────────── */
+.statement-story {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.statement-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    transform: scale(1.05);
+}
+
+.statement-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1;
+}
+
+.statement-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 40px;
+}
+
+.statement-text {
+    font-size: clamp(2rem, 5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+/* ─────────────── CONTACT ─────────────── */
+.contact-story {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    background: var(--bg);
+    padding: 120px 7vw;
+}
+
+.contact-inner {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.contact-email {
+    display: block;
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--dark);
+    text-decoration: none;
+    line-height: 1;
+    margin-bottom: 30px;
+    transition: color 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+.contact-email::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 2px;
+    background: var(--green);
+    transition: width 0.5s cubic-bezier(0.2, 1, 0.2, 1);
+}
+
+.contact-email:hover { color: var(--green); }
+.contact-email:hover::after { width: 100%; }
+
+.contact-phones {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.contact-phone {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: rgba(0,0,0,0.7);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-phone:hover { color: var(--green); }
+
+.contact-sep {
+    color: rgba(0,0,0,0.3);
+}
+
+.contact-footer {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: rgba(0,0,0,0.3);
+    text-transform: uppercase;
+}
+
+/* ─────────────── RESPONSIVE ─────────────── */
+@media (max-width: 900px) {
+    .split-layout {
+        grid-template-columns: 1fr;
+    }
+    .split-image {
+        display: none;
+    }
+    .split-text {
+        padding: 60px 7vw;
+    }
+    .service-row {
+        grid-template-columns: 50px 1fr;
+    }
+    .service-img {
+        display: none;
+    }
+    .portfolio-slide {
+        width: clamp(220px, 70vw, 300px);
+    }
+    .statement-text {
+        font-size: clamp(1.8rem, 7vw, 3rem);
+    }
+}
