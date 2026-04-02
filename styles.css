@@ -635,26 +635,53 @@ body {
 }
 
 /* ─────────────── RESPONSIVE ─────────────── */
+
+/* Disable custom cursor glow & scroll progress on touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .cursor-glow { display: none !important; }
+    .scroll-progress { display: none !important; }
+    .mouse { display: none !important; } /* Hide mouse indicator on mobile hero */
+}
+
 @media (max-width: 900px) {
-    .split-layout {
-        grid-template-columns: 1fr;
-    }
-    .split-image {
-        display: none;
-    }
-    .split-text {
-        padding: 60px 7vw;
-    }
-    .service-row {
-        grid-template-columns: 50px 1fr;
-    }
-    .service-img {
-        display: none;
-    }
-    .portfolio-slide {
-        width: clamp(220px, 70vw, 300px);
-    }
-    .statement-text {
-        font-size: clamp(1.8rem, 7vw, 3rem);
-    }
+    .split-layout { grid-template-columns: 1fr; }
+    .split-image { display: none; }
+    .split-text { padding: 60px 7vw; }
+    
+    .service-row { grid-template-columns: 50px 1fr; }
+    .service-img { display: none; }
+    
+    .portfolio-slide { width: clamp(260px, 60vw, 340px); }
+    .statement-text { font-size: clamp(2rem, 6vw, 3rem); }
+    
+    .nav-links { gap: 24px; }
+}
+
+@media (max-width: 600px) {
+    /* Navbar compression for small phones */
+    .navbar { padding: 16px 5vw; flex-direction: column; gap: 12px; }
+    .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .nav-logo img { height: 24px; }
+
+    /* Adjust typography */
+    .section-label { font-size: 0.65rem; margin-bottom: 32px; }
+    .reveal-text { font-size: 2rem; margin-bottom: 24px; }
+    .body-text { font-size: 1rem; }
+    
+    /* Services compaction */
+    .services-story { padding: 80px 5vw; }
+    .service-row { padding: 24px 0; gap: 20px; }
+    .service-content h3 { font-size: 1.3rem; }
+    .service-content p { font-size: 0.85rem; }
+
+    /* Portfolio slides take up most of the screen on mobile */
+    .portfolio-story { height: 400vh; }
+    .portfolio-pinned { padding: 80px 5vw 40px; }
+    .portfolio-slide { width: 80vw; }
+
+    /* Contact Section stacked */
+    .contact-story { padding: 80px 5vw; }
+    .contact-email { font-size: clamp(1.6rem, 7vw, 2.5rem); margin-bottom: 24px; word-break: break-all; }
+    .contact-phones { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 60px; }
+    .contact-sep { display: none; }
 }
