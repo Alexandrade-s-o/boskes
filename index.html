@@ -6,198 +6,298 @@
     <title>Boskes — Estudio de Diseño</title>
     <meta name="description" content="Boskes Estudio de Diseño. Experiencias arquitectónicas inspiradas en la naturaleza.">
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- WOW: Cursor Glow -->
-    <div class="cursor-glow" id="cursorGlow"></div>
-
-    <!-- WOW: Scroll Progress -->
-    <div class="scroll-progress">
-        <div class="scroll-progress-track">
-            <div class="scroll-progress-fill" id="scrollFill"></div>
+    <!-- WIN2K DESKTOP TASKBAR -->
+    <div class="taskbar" id="taskbar">
+        <div class="start-btn" id="startBtn">
+            <img src="logo.png" alt="Boskes" class="start-logo">
+            <span>Boskes Studio</span>
         </div>
+        <div class="taskbar-divider"></div>
+        <div class="taskbar-clock" id="taskbarClock">00:00</div>
     </div>
 
-    <!-- NAVBAR -->
-    <nav class="navbar" id="navbar">
-        <a href="#scrolly-hero" class="nav-logo">
-            <img src="8c1dab61-61fb-42e3-9424-e08259c4a4db.png" alt="Boskes">
-        </a>
-        <ul class="nav-links">
-            <li><a href="#nosotros">Nosotros</a></li>
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#proyectos">Proyectos</a></li>
-            <li><a href="#contacto">Contáctanos</a></li>
+    <!-- START MENU (toggles) -->
+    <div class="start-menu" id="startMenu">
+        <div class="start-menu-header">
+            <img src="logo.png" alt="Boskes" style="height:40px;">
+            <span>Boskes Studio</span>
+        </div>
+        <ul class="start-menu-list">
+            <li><a href="#nosotros">📁 Nosotros</a></li>
+            <li><a href="#servicios">🖥️ Servicios</a></li>
+            <li><a href="#proyectos">🗂️ Proyectos</a></li>
+            <li><a href="#contacto">📧 Contáctanos</a></li>
         </ul>
-    </nav>
+    </div>
 
-    <!-- ===== HERO SECTION ===== -->
-    <section id="scrolly-hero" class="scrolly-hero">
-        <div class="hero-pinned" style="background-image: url('re_haz_esa_202604012056.png');">
-            <div class="content-container">
-                <div class="frame frame-1 frame-logo">
-                    <img src="8c1dab61-61fb-42e3-9424-e08259c4a4db.png" alt="Boskes Logo" class="hero-logo">
+    <!-- DESKTOP AREA -->
+    <div class="desktop" id="desktop">
+
+        <!-- DESKTOP ICON: LOGO WINDOW -->
+        <div class="desktop-icon" onclick="openWindow('logoWindow')">
+            <img src="logo.png" alt="Boskes" class="icon-img">
+            <span>Boskes.exe</span>
+        </div>
+        <div class="desktop-icon" onclick="openWindow('aboutWindow')">
+            <div class="icon-generic">📂</div>
+            <span>Nosotros</span>
+        </div>
+        <div class="desktop-icon" onclick="openWindow('servicesWindow')">
+            <div class="icon-generic">🖥️</div>
+            <span>Servicios</span>
+        </div>
+        <div class="desktop-icon" onclick="openWindow('portfolioWindow')">
+            <div class="icon-generic">🖼️</div>
+            <span>Proyectos</span>
+        </div>
+        <div class="desktop-icon" onclick="openWindow('contactWindow')">
+            <div class="icon-generic">📧</div>
+            <span>Contacto</span>
+        </div>
+
+        <!-- WALLPAPER MARQUEE (Win2K classic tip) -->
+        <div class="desktop-marquee">
+            <marquee behavior="scroll" direction="left">
+                ★ Boskes Estudio de Diseño ★ Experiencias arquitectónicas inmersivas ★ Fusionando el entorno natural ★ Casa Entre Árboles ★ Espacio Mok ★ Jardín Forestal ★ Interior Biofílico ★
+            </marquee>
+        </div>
+
+        <!-- ====== WINDOWS ====== -->
+
+        <!-- HERO WINDOW -->
+        <div class="win2k-window" id="logoWindow" style="top:60px;left:80px;width:520px;z-index:100;">
+            <div class="win-titlebar" onmousedown="startDrag(event,'logoWindow')">
+                <div class="win-title">
+                    <img src="logo.png" alt="" style="height:14px;margin-right:6px;">
+                    Boskes Studio — Bienvenido
                 </div>
-                <div class="frame frame-3">
-                    <p class="description">Creamos experiencias arquitectónicas<br>inmersivas fusionando el entorno natural.</p>
+                <div class="win-controls">
+                    <button class="win-btn win-minimize" onclick="minimizeWindow('logoWindow')">_</button>
+                    <button class="win-btn win-maximize" onclick="maximizeWindow('logoWindow')">□</button>
+                    <button class="win-btn win-close" onclick="closeWindow('logoWindow')">✕</button>
                 </div>
             </div>
-            <div class="scroll-indicator">
-                <div class="mouse"></div>
-                <span>DESLIZAR</span>
+            <div class="win-menubar">
+                <span>Archivo</span><span>Editar</span><span>Ver</span><span>Ayuda</span>
+            </div>
+            <div class="win-body hero-win-body">
+                <div class="hero-photo" style="background-image:url('re_haz_esa_202604012056.png');">
+                    <div class="hero-photo-overlay"></div>
+                    <img src="8c1dab61-61fb-42e3-9424-e08259c4a4db.png" alt="Boskes Logo" class="hero-logo-img">
+                </div>
+                <div class="hero-desc-bar">
+                    <p>Creamos experiencias arquitectónicas inmersivas fusionando el entorno natural.</p>
+                </div>
+            </div>
+            <div class="win-statusbar">
+                <span>✔ 1 objeto(s)</span>
+                <span>Listo</span>
             </div>
         </div>
-    </section>
 
-    <!-- ===== NOSOTROS — SPLIT TEXT + IMAGE ===== -->
-    <section class="story-section about-story" id="nosotros">
-        <div class="story-sticky">
-            <div class="split-layout">
-                <div class="split-text">
-                    <span class="section-label">NOSOTROS</span>
-                    <h2 class="reveal-text">Entrar en un bosque<br><em>mejora la salud,</em><br>el bienestar y la<br>felicidad.</h2>
-                    <p class="body-text">El estudio de la naturaleza es nuestra principal inspiración. En <strong>Boskes</strong> diseñamos espacios que conectan a las personas con lo esencial — la luz, el material, el silencio.</p>
+        <!-- NOSOTROS WINDOW -->
+        <div class="win2k-window" id="aboutWindow" style="top:120px;left:640px;width:460px;z-index:99;display:none;">
+            <div class="win-titlebar" onmousedown="startDrag(event,'aboutWindow')">
+                <div class="win-title">📂 Nosotros</div>
+                <div class="win-controls">
+                    <button class="win-btn win-minimize" onclick="minimizeWindow('aboutWindow')">_</button>
+                    <button class="win-btn win-maximize" onclick="maximizeWindow('aboutWindow')">□</button>
+                    <button class="win-btn win-close" onclick="closeWindow('aboutWindow')">✕</button>
                 </div>
-                <div class="split-image">
-                    <div class="image-clip" style="background-image: url('minimalist_architectural_space_202604011943.png');"></div>
+            </div>
+            <div class="win-menubar">
+                <span>Archivo</span><span>Editar</span><span>Ver</span><span>Ayuda</span>
+            </div>
+            <div class="win-body about-win-body">
+                <div class="about-img-box" style="background-image:url('minimalist_architectural_space_202604011943.png');"></div>
+                <div class="about-text-box">
+                    <div class="fieldset-box">
+                        <legend>Nuestra Filosofía</legend>
+                        <p class="about-heading">Entrar en un bosque <em>mejora la salud,</em> el bienestar y la felicidad.</p>
+                        <p class="about-body">El estudio de la naturaleza es nuestra principal inspiración. En <strong>Boskes</strong> diseñamos espacios que conectan a las personas con lo esencial — la luz, el material, el silencio.</p>
+                    </div>
+                    <button class="win2k-btn" onclick="openWindow('contactWindow')">Contáctanos &gt;&gt;</button>
+                </div>
+            </div>
+            <div class="win-statusbar"><span>✔ Listo</span></div>
+        </div>
+
+        <!-- SERVICIOS WINDOW -->
+        <div class="win2k-window" id="servicesWindow" style="top:200px;left:160px;width:580px;z-index:98;display:none;">
+            <div class="win-titlebar" onmousedown="startDrag(event,'servicesWindow')">
+                <div class="win-title">🖥️ Servicios</div>
+                <div class="win-controls">
+                    <button class="win-btn win-minimize" onclick="minimizeWindow('servicesWindow')">_</button>
+                    <button class="win-btn win-maximize" onclick="maximizeWindow('servicesWindow')">□</button>
+                    <button class="win-btn win-close" onclick="closeWindow('servicesWindow')">✕</button>
+                </div>
+            </div>
+            <div class="win-menubar">
+                <span>Archivo</span><span>Editar</span><span>Ver</span><span>Ayuda</span>
+            </div>
+            <div class="win-body services-win-body">
+                <div class="services-toolbar">
+                    <button class="win2k-btn small">▲ Subir</button>
+                    <button class="win2k-btn small">▼ Bajar</button>
+                    <div class="toolbar-sep"></div>
+                    <button class="win2k-btn small">Ver detalles</button>
+                </div>
+                <table class="services-table">
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Servicio</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="service-tr" onclick="selectRow(this)">
+                            <td>01</td>
+                            <td>🌿 Paisajismo</td>
+                            <td>El paisaje como extensión del alma del espacio interior.</td>
+                        </tr>
+                        <tr class="service-tr" onclick="selectRow(this)">
+                            <td>02</td>
+                            <td>🏠 Diseño Residencial</td>
+                            <td>El hogar como refugio. El espacio como extensión del ser.</td>
+                        </tr>
+                        <tr class="service-tr" onclick="selectRow(this)">
+                            <td>03</td>
+                            <td>🏢 Diseño Comercial</td>
+                            <td>Espacios que narran la identidad de una marca de forma inmersiva.</td>
+                        </tr>
+                        <tr class="service-tr" onclick="selectRow(this)">
+                            <td>04</td>
+                            <td>✨ Diseño Efímero</td>
+                            <td>Instalaciones temporales que dejan huellas permanentes.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="win-statusbar"><span>4 objeto(s)</span><span>Listo</span></div>
+        </div>
+
+        <!-- PORTFOLIO WINDOW -->
+        <div class="win2k-window" id="portfolioWindow" style="top:240px;left:300px;width:640px;z-index:97;display:none;">
+            <div class="win-titlebar" onmousedown="startDrag(event,'portfolioWindow')">
+                <div class="win-title">🖼️ Proyectos — Galería</div>
+                <div class="win-controls">
+                    <button class="win-btn win-minimize" onclick="minimizeWindow('portfolioWindow')">_</button>
+                    <button class="win-btn win-maximize" onclick="maximizeWindow('portfolioWindow')">□</button>
+                    <button class="win-btn win-close" onclick="closeWindow('portfolioWindow')">✕</button>
+                </div>
+            </div>
+            <div class="win-menubar">
+                <span>Archivo</span><span>Ver</span><span>Favoritos</span><span>Ayuda</span>
+            </div>
+            <div class="win-body portfolio-win-body">
+                <div class="portfolio-address-bar">
+                    <span>Dirección:</span>
+                    <div class="address-input">C:\Boskes\Proyectos\</div>
+                    <button class="win2k-btn small">Ir</button>
+                </div>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <div class="pitem-img" style="background-image:url('proyecto_residencial.png');"></div>
+                        <div class="pitem-name">Casa Entre Árboles</div>
+                        <div class="pitem-type">Residencial</div>
+                    </div>
+                    <div class="portfolio-item">
+                        <div class="pitem-img" style="background-image:url('proyecto_comercial.png');"></div>
+                        <div class="pitem-name">Espacio Mok</div>
+                        <div class="pitem-type">Comercial</div>
+                    </div>
+                    <div class="portfolio-item">
+                        <div class="pitem-img" style="background-image:url('minimalist_architectural_space_202604011943.png');"></div>
+                        <div class="pitem-name">Jardín Forestal</div>
+                        <div class="pitem-type">Paisajismo</div>
+                    </div>
+                    <div class="portfolio-item">
+                        <div class="pitem-img" style="background-image:url('dark_minimalistic_interior,_202604011943.png');"></div>
+                        <div class="pitem-name">Interior Biofílico</div>
+                        <div class="pitem-type">Residencial · Biofílico</div>
+                    </div>
+                    <div class="portfolio-item">
+                        <div class="pitem-img" style="background-image:url('proyecto_residencial.png');"></div>
+                        <div class="pitem-name">Instalación Bosques</div>
+                        <div class="pitem-type">Efímero</div>
+                    </div>
+                    <div class="portfolio-item">
+                        <div class="pitem-img" style="background-image:url('proyecto_comercial.png');"></div>
+                        <div class="pitem-name">Lobby Corporativo</div>
+                        <div class="pitem-type">Comercial</div>
+                    </div>
+                </div>
+            </div>
+            <div class="win-statusbar"><span>6 objeto(s)</span><span>Listo</span></div>
+        </div>
+
+        <!-- CONTACT WINDOW -->
+        <div class="win2k-window" id="contactWindow" style="top:320px;left:500px;width:400px;z-index:96;display:none;">
+            <div class="win-titlebar" onmousedown="startDrag(event,'contactWindow')">
+                <div class="win-title">📧 Contáctanos</div>
+                <div class="win-controls">
+                    <button class="win-btn win-minimize" onclick="minimizeWindow('contactWindow')">_</button>
+                    <button class="win-btn win-maximize" onclick="maximizeWindow('contactWindow')">□</button>
+                    <button class="win-btn win-close" onclick="closeWindow('contactWindow')">✕</button>
+                </div>
+            </div>
+            <div class="win-menubar">
+                <span>Archivo</span><span>Editar</span><span>Ayuda</span>
+            </div>
+            <div class="win-body contact-win-body">
+                <div class="contact-dialog">
+                    <div class="dialog-icon">📧</div>
+                    <div class="dialog-info">
+                        <p class="dialog-title">Boskes Studio</p>
+                        <p class="dialog-subtitle">Estudio de Diseño Arquitectónico</p>
+                    </div>
+                </div>
+                <div class="contact-fields">
+                    <div class="field-row">
+                        <label>WhatsApp:</label>
+                        <a href="https://wa.me/573008235309" target="_blank" class="field-link">(+57) 300 823 53 09</a>
+                    </div>
+                    <div class="field-row">
+                        <label>Email:</label>
+                        <a href="mailto:boskesproyectos@gmail.com" class="field-link">boskesproyectos@gmail.com</a>
+                    </div>
+                    <div class="field-row">
+                        <label>Teléfono:</label>
+                        <a href="tel:+573195159103" class="field-link">(+57) 319 515 91 03</a>
+                    </div>
+                </div>
+                <div class="contact-buttons">
+                    <a href="https://wa.me/573008235309" target="_blank" class="win2k-btn primary">Enviar Mensaje</a>
+                    <button class="win2k-btn" onclick="closeWindow('contactWindow')">Cancelar</button>
+                </div>
+            </div>
+            <div class="win-statusbar"><span>Boskes Studio © 2024</span></div>
+        </div>
+
+        <!-- STATEMENT DIALOG (modal style) -->
+        <div class="win2k-window dialog-window" id="statementDialog" style="top:50%;left:50%;transform:translate(-50%,-50%);width:460px;z-index:200;display:none;">
+            <div class="win-titlebar" onmousedown="startDrag(event,'statementDialog')">
+                <div class="win-title">ℹ️ Boskes — Filosofía</div>
+                <div class="win-controls">
+                    <button class="win-btn win-close" onclick="closeWindow('statementDialog')">✕</button>
+                </div>
+            </div>
+            <div class="win-body statement-body">
+                <div class="statement-icon">🌲</div>
+                <p class="statement-quote">"El estudio de la naturaleza<br>es nuestra inspiración<br>al diseñar."</p>
+                <div class="statement-divider"></div>
+                <div class="statement-btns">
+                    <button class="win2k-btn primary" onclick="closeWindow('statementDialog')">Aceptar</button>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- ===== SERVICIOS — DARK STAGGER ===== -->
-    <section class="story-section services-story" id="servicios">
-        <div class="services-inner">
-            <span class="section-label section-label--light">SERVICIOS</span>
-            <div class="services-stagger">
-                <div class="service-row">
-                    <span class="service-num">01</span>
-                    <div class="service-content">
-                        <h3>Paisajismo</h3>
-                        <p>El paisaje como extensión del alma del espacio interior.</p>
-                    </div>
-                    <div class="service-img" style="background-image: url('minimalist_architectural_space_202604011943.png');"></div>
-                </div>
-                <div class="service-row">
-                    <span class="service-num">02</span>
-                    <div class="service-content">
-                        <h3>Diseño Residencial</h3>
-                        <p>El hogar como refugio. El espacio como extensión del ser.</p>
-                    </div>
-                    <div class="service-img" style="background-image: url('dark_minimalistic_interior,_202604011943.png');"></div>
-                </div>
-                <div class="service-row">
-                    <span class="service-num">03</span>
-                    <div class="service-content">
-                        <h3>Diseño Comercial</h3>
-                        <p>Espacios que narran la identidad de una marca de forma inmersiva.</p>
-                    </div>
-                    <div class="service-img" style="background-image: url('minimalist_architectural_space_202604011943.png');"></div>
-                </div>
-                <div class="service-row">
-                    <span class="service-num">04</span>
-                    <div class="service-content">
-                        <h3>Diseño Efímero</h3>
-                        <p>Instalaciones temporales que dejan huellas permanentes.</p>
-                    </div>
-                    <div class="service-img" style="background-image: url('dark_minimalistic_interior,_202604011943.png');"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div><!-- /desktop -->
 
-    <!-- ===== PROYECTOS — GALERÍA HORIZONTAL ===== -->
-    <section class="story-section portfolio-story" id="proyectos">
-        <div class="portfolio-pinned">
-            <div class="portfolio-header">
-                <span class="section-label">PROYECTOS</span>
-                <p class="portfolio-hint">← deslizar →</p>
-            </div>
-            <div class="portfolio-track">
-                <div class="portfolio-slide">
-                    <div class="pslide-img" style="background-image: url('proyecto_residencial.png');"></div>
-                    <div class="pslide-info">
-                        <span class="pslide-num">01</span>
-                        <h4>Casa Entre Árboles</h4>
-                        <span class="pslide-tag">Residencial</span>
-                    </div>
-                </div>
-                <div class="portfolio-slide">
-                    <div class="pslide-img" style="background-image: url('proyecto_comercial.png');"></div>
-                    <div class="pslide-info">
-                        <span class="pslide-num">02</span>
-                        <h4>Espacio Mok</h4>
-                        <span class="pslide-tag">Comercial</span>
-                    </div>
-                </div>
-                <div class="portfolio-slide">
-                    <div class="pslide-img" style="background-image: url('minimalist_architectural_space_202604011943.png');"></div>
-                    <div class="pslide-info">
-                        <span class="pslide-num">03</span>
-                        <h4>Jardín Forestal</h4>
-                        <span class="pslide-tag">Paisajismo</span>
-                    </div>
-                </div>
-                <div class="portfolio-slide">
-                    <div class="pslide-img" style="background-image: url('dark_minimalistic_interior,_202604011943.png');"></div>
-                    <div class="pslide-info">
-                        <span class="pslide-num">04</span>
-                        <h4>Interior Biofílico</h4>
-                        <span class="pslide-tag">Residencial · Biofílico</span>
-                    </div>
-                </div>
-                <div class="portfolio-slide">
-                    <div class="pslide-img" style="background-image: url('proyecto_residencial.png');"></div>
-                    <div class="pslide-info">
-                        <span class="pslide-num">05</span>
-                        <h4>Instalación Bosques</h4>
-                        <span class="pslide-tag">Efímero</span>
-                    </div>
-                </div>
-                <div class="portfolio-slide">
-                    <div class="pslide-img" style="background-image: url('proyecto_comercial.png');"></div>
-                    <div class="pslide-info">
-                        <span class="pslide-num">06</span>
-                        <h4>Lobby Corporativo</h4>
-                        <span class="pslide-tag">Comercial</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== FRASE FINAL — FULL SCREEN STATEMENT ===== -->
-    <section class="story-section statement-story" id="frase">
-        <div class="statement-bg" style="background-image: url('6873cf3f-be83-4727-920c-eb968d77905b.png');"></div>
-        <div class="statement-overlay"></div>
-        <div class="statement-content">
-            <h2 class="statement-text">El estudio de la naturaleza<br>es nuestra inspiración<br>al diseñar.</h2>
-        </div>
-    </section>
-
-    <!-- ===== CONTACTO ===== -->
-    <section class="story-section contact-story" id="contacto">
-        <div class="contact-inner">
-            <span class="section-label">CONTÁCTANOS</span>
-            <!-- Big CTA is now the WhatsApp number requested by user -->
-            <a href="https://wa.me/573008235309" target="_blank" class="contact-email">(+57) 300 823 53 09</a>
-            <div class="contact-phones">
-                <a href="mailto:boskesproyectos@gmail.com" class="contact-phone">boskesproyectos@gmail.com</a>
-                <span class="contact-sep">/</span>
-                <a href="tel:+573195159103" class="contact-phone">(+57) 319 515 91 03</a>
-            </div>
-            <p class="contact-footer">Boskes Studio © 2024</p>
-        </div>
-    </section>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
