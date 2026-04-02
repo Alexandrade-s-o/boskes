@@ -238,6 +238,56 @@ window.addEventListener('load', () => {
 });
 
 /* ─────────────────────────────────────────────────
+   HAMBURGER MENU
+   Toggle mobile fullscreen overlay
+───────────────────────────────────────────────── */
+const burgerBtn  = document.getElementById('burgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+
+function toggleMenu(forceClose = false) {
+    const isOpen = burgerBtn.classList.contains('open');
+    if (forceClose || isOpen) {
+        burgerBtn.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = ''; // Restore scroll
+    } else {
+        burgerBtn.classList.add('open');
+        mobileMenu.classList.add('open');
+        document.body.style.overflow = 'hidden'; // Lock scroll while menu open
+    }
+}
+
+if (burgerBtn && mobileMenu) {
+    burgerBtn.addEventListener('click', () => toggleMenu());
+
+    // Close menu + smooth scroll to section on link click
+    mobileMenu.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleMenu(true); // Close first
+            const target = document.querySelector(link.getAttribute('href'));
+            if (target) {
+                // Small timeout to let menu close before scrolling
+                setTimeout(() => {
+                    lenis.scrollTo(target, {
+                        offset: -20,
+                        duration: 1.8,
+                        easing: t => t < 0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2
+                    });
+                }, 300);
+            }
+        });
+    });
+
+    // Also close on ESC key
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') toggleMenu(true);
+    });
+}
+
+
+
+/* ─────────────────────────────────────────────────
    WOW #1: CURSOR LUMINOUS GLOW
    Ultra-smooth radial light follows the cursor
 ───────────────────────────────────────────────── */
