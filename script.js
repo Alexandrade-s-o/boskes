@@ -5,14 +5,15 @@
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Don't let the mobile URL-bar show/hide trigger ScrollTrigger refreshes (prevents jumps)
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 // ── LENIS SMOOTH SCROLL ──────────────────────────
 const lenis = new Lenis({
     duration: 1.05,                  /* snappier than before — less floaty */
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),  /* natural decel */
-    smoothWheel: true,               /* Lenis 1.x API */
-    syncTouch: true,                 /* enable smooth scroll on touch devices */
-    syncTouchLerp: 0.1,              /* gentle smoothing for fingers */
-    touchMultiplier: 1.6,            /* touch keeps a natural drag feel */
+    smoothWheel: true,               /* smooth on desktop wheel/trackpad */
+    syncTouch: false,                /* native scroll on touch — far more reliable with pinned sections */
     wheelMultiplier: 1.0,            /* standard sensitivity */
 });
 

@@ -264,6 +264,7 @@ body {
 
 .hero-pinned {
     height: 100vh;
+    height: 100svh; /* stable on mobile — ignores URL-bar show/hide */
     width: 100%;
     position: sticky;
     top: 0;
@@ -399,6 +400,7 @@ body {
 
 .story-sticky {
     height: 100vh;
+    height: 100svh;
     position: sticky;
     top: 0;
     display: flex;
@@ -565,6 +567,7 @@ body {
 
 .portfolio-pinned {
     height: 100vh;
+    height: 100svh;
     position: sticky;
     top: 0;
     overflow: hidden;
@@ -647,6 +650,7 @@ body {
 /* ─────────────── STATEMENT ─────────────── */
 .statement-story {
     height: 100vh;
+    height: 100svh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -909,6 +913,7 @@ body {
 
 @media (max-width: 900px) {
     .dot-nav { display: none; } /* Avoid overlapping content on narrow screens */
+    .about-story { height: 140vh; } /* Less dead scroll — image is hidden here */
     .split-layout { grid-template-columns: 1fr; }
     .split-image { display: none; }
     .split-text { padding: 60px 7vw; }
@@ -927,12 +932,21 @@ body {
     .nav-links { display: none; }
     .burger { display: flex; }
     .navbar { flex-direction: row; } /* Keep logo + burger on same row */
+
+    /* Shorter hero on tablets — mouse parallax is touch-disabled here */
+    .scrolly-hero { height: 320vh; }
 }
 
 @media (max-width: 600px) {
     /* Navbar stays horizontal — logo left, burger right */
     .navbar { padding: 16px 5vw; flex-direction: row; justify-content: space-between; align-items: center; }
     .nav-logo img { height: 24px; }
+
+    /* Even shorter hero on phones — keeps the intro snappy */
+    .scrolly-hero { height: 260vh; }
+
+    /* Smaller back-to-top FAB so it doesn't crowd the screen */
+    .back-to-top { width: 42px; height: 42px; right: 18px; bottom: 18px; }
 
     /* Adjust typography */
     .section-label { font-size: 0.65rem; margin-bottom: 32px; }
