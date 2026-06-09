@@ -4,11 +4,15 @@
    =================================================== */
 
 :root {
-    --bg: #ffffff;
-    --dark: #111111;
+    --bg: #faf6f1;          /* warm woody off-white instead of clinical pure white */
+    --dark: #1c1512;        /* coffee-tinted near-black */
     --green: #2d5a27;
     --green-light: #4a8c40;
     --green-soft: rgba(45, 90, 39, 0.08);
+    /* Woody coffee accent palette */
+    --coffee: #5b4334;
+    --coffee-light: #8a6a4f;
+    --coffee-soft: rgba(91, 67, 52, 0.10);
     --font: 'Montserrat', sans-serif;
 }
 
@@ -18,7 +22,7 @@
     width: 400px;
     height: 400px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(74,140,64,0.12) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(138,106,79,0.14) 0%, transparent 70%); /* warm woody coffee glow */
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
@@ -460,7 +464,7 @@ body {
 
 /* ─────────────── SERVICIOS — DARK STAGGER ─────────────── */
 .services-story {
-    background: var(--dark);
+    background: linear-gradient(160deg, #1c1512 0%, #2a1d15 100%); /* warm woody coffee dark */
     padding: 120px 7vw;
     min-height: 100vh;
     display: flex;
@@ -661,7 +665,7 @@ body {
 .statement-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(28, 21, 18, 0.55); /* warm coffee veil instead of flat black */
     z-index: 1;
 }
 
