@@ -254,7 +254,7 @@ body {
 
 /* ─────────────── HERO ─────────────── */
 .scrolly-hero {
-    height: 600vh; /* Extremely long track to accommodate large, separated story beats without clipping */
+    height: 400vh; /* Long enough for the story beats, short enough to feel agile */
     position: relative;
 }
 
@@ -555,7 +555,7 @@ body {
 
 /* ─────────────── PORTFOLIO — HORIZONTAL GALLERY ─────────────── */
 .portfolio-story {
-    height: 600vh; /* Long scroll for horizontal gallery */
+    height: 450vh; /* Horizontal gallery — trimmed for a quicker pass */
     background: var(--bg);
 }
 
@@ -942,7 +942,7 @@ body {
     .service-content p { font-size: 0.85rem; }
 
     /* Portfolio slides take up most of the screen on mobile */
-    .portfolio-story { height: 400vh; }
+    .portfolio-story { height: 320vh; }
     .portfolio-pinned { padding: 80px 5vw 40px; }
     .portfolio-slide { width: 80vw; }
 

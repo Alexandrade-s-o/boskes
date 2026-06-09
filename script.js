@@ -7,10 +7,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 // ── LENIS SMOOTH SCROLL ──────────────────────────
 const lenis = new Lenis({
-    duration: 1.3,                   /* crisp, responsive — not too slow */
+    duration: 1.05,                  /* snappier than before — less floaty */
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),  /* natural decel */
-    smooth: true,
-    smoothTouch: false,
+    smoothWheel: true,               /* Lenis 1.x API */
+    syncTouch: true,                 /* enable smooth scroll on touch devices */
+    syncTouchLerp: 0.1,              /* gentle smoothing for fingers */
+    touchMultiplier: 1.6,            /* touch keeps a natural drag feel */
     wheelMultiplier: 1.0,            /* standard sensitivity */
 });
 
@@ -176,7 +178,8 @@ if (portfolioTrack && portfolioPinned) {
             trigger: '.portfolio-story',
             start: 'top top',
             end: 'bottom bottom',
-            scrub: 1.5,
+            scrub: 1.0,                 /* tighter catch-up — less horizontal lag */
+            invalidateOnRefresh: true,  /* recompute scroll distance on resize */
         }
     });
 
@@ -251,11 +254,13 @@ function toggleMenu(forceClose = false) {
         mobileMenu.classList.remove('open');
         burgerBtn.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = ''; // Restore scroll
+        lenis.start();                      // Resume smooth scroll
     } else {
         burgerBtn.classList.add('open');
         mobileMenu.classList.add('open');
         burgerBtn.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden'; // Lock scroll while menu open
+        lenis.stop();                            // Freeze background (also blocks touch scroll)
     }
 }
 
