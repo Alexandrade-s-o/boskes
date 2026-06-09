@@ -249,10 +249,12 @@ function toggleMenu(forceClose = false) {
     if (forceClose || isOpen) {
         burgerBtn.classList.remove('open');
         mobileMenu.classList.remove('open');
+        burgerBtn.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = ''; // Restore scroll
     } else {
         burgerBtn.classList.add('open');
         mobileMenu.classList.add('open');
+        burgerBtn.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden'; // Lock scroll while menu open
     }
 }
@@ -333,4 +335,63 @@ document.querySelectorAll('.service-row').forEach((row) => {
         gsap.to(row, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1, 0.5)', overwrite: 'auto' });
     });
 });
+
+
+/* ─────────────────────────────────────────────────
+   WOW #4: SCROLL-SPY + DOT NAV + BACK-TO-TOP
+   Highlights the active section across navbar & dots,
+   reveals the side dots and the back-to-top control.
+───────────────────────────────────────────────── */
+const sectionIds = ['scrolly-hero', 'nosotros', 'servicios', 'proyectos', 'frase', 'contacto'];
+const sections   = sectionIds
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+const spyLinks   = document.querySelectorAll('[data-spy]');
+const dotNav     = document.getElementById('dotNav');
+const backToTop  = document.getElementById('backToTop');
+
+let activeId = null;
+
+function setActiveSection(id) {
+    if (id === activeId) return;
+    activeId = id;
+    spyLinks.forEach(link => {
+        const isActive = link.dataset.spy === id;
+        link.classList.toggle('active', isActive);
+        // aria-current marks the in-view section for assistive tech
+        if (isActive) link.setAttribute('aria-current', 'true');
+        else link.removeAttribute('aria-current');
+    });
+}
+
+function updateNavState(scroll) {
+    // Reference line at 45% of the viewport — the section crossing it is "active"
+    const refLine = scroll + window.innerHeight * 0.45;
+    let current = sections[0];
+    for (const section of sections) {
+        if (section.offsetTop <= refLine) current = section;
+    }
+    if (current) setActiveSection(current.id);
+
+    // Reveal dots + back-to-top once the user leaves the hero
+    const past = scroll > window.innerHeight * 0.6;
+    if (dotNav)    dotNav.classList.toggle('visible', past);
+    if (backToTop) backToTop.classList.toggle('visible', past);
+}
+
+// Drive it from Lenis so it stays in sync with the smooth scroll
+lenis.on('scroll', ({ scroll }) => updateNavState(scroll));
+// Initial paint (also after a refresh / resize recomputes offsets)
+window.addEventListener('load', () => updateNavState(window.scrollY));
+ScrollTrigger.addEventListener('refreshInit', () => updateNavState(window.scrollY));
+
+// Back-to-top → smooth scroll to the very top
+if (backToTop) {
+    backToTop.addEventListener('click', () => {
+        lenis.scrollTo(0, {
+            duration: 1.8,
+            easing: t => t < 0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2
+        });
+    });
+}
 

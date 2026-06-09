@@ -23,24 +23,42 @@
     </div>
 
     <!-- NAVBAR -->
-    <nav class="navbar" id="navbar">
-        <a href="#scrolly-hero" class="nav-logo">
+    <nav class="navbar" id="navbar" aria-label="Navegación principal">
+        <a href="#scrolly-hero" class="nav-logo" aria-label="Boskes — Inicio">
             <img src="8c1dab61-61fb-42e3-9424-e08259c4a4db.png" alt="Boskes">
         </a>
         <!-- Desktop links -->
         <ul class="nav-links">
-            <li><a href="#nosotros">Nosotros</a></li>
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#proyectos">Proyectos</a></li>
-            <li><a href="#contacto">Contáctanos</a></li>
+            <li><a href="#nosotros" data-spy="nosotros">Nosotros</a></li>
+            <li><a href="#servicios" data-spy="servicios">Servicios</a></li>
+            <li><a href="#proyectos" data-spy="proyectos">Proyectos</a></li>
+            <li><a href="#contacto" data-spy="contacto">Contáctanos</a></li>
         </ul>
         <!-- Hamburger button (mobile only) -->
-        <button class="burger" id="burgerBtn" aria-label="Abrir menú">
+        <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
             <span></span>
             <span></span>
             <span></span>
         </button>
     </nav>
+
+    <!-- WOW: Section dot navigation (jump between sections) -->
+    <nav class="dot-nav" id="dotNav" aria-label="Navegación por secciones">
+        <a href="#scrolly-hero" class="dot" data-spy="scrolly-hero" aria-label="Ir a Inicio"><span class="dot-label">Inicio</span></a>
+        <a href="#nosotros" class="dot" data-spy="nosotros" aria-label="Ir a Nosotros"><span class="dot-label">Nosotros</span></a>
+        <a href="#servicios" class="dot" data-spy="servicios" aria-label="Ir a Servicios"><span class="dot-label">Servicios</span></a>
+        <a href="#proyectos" class="dot" data-spy="proyectos" aria-label="Ir a Proyectos"><span class="dot-label">Proyectos</span></a>
+        <a href="#frase" class="dot" data-spy="frase" aria-label="Ir a Frase"><span class="dot-label">Frase</span></a>
+        <a href="#contacto" class="dot" data-spy="contacto" aria-label="Ir a Contacto"><span class="dot-label">Contacto</span></a>
+    </nav>
+
+    <!-- WOW: Back to top button -->
+    <button class="back-to-top" id="backToTop" aria-label="Volver al inicio">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
 
     <!-- MOBILE FULLSCREEN OVERLAY -->
     <div class="mobile-menu" id="mobileMenu">
