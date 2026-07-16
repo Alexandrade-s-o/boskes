@@ -1,0 +1,9 @@
+.DS_Store
+**/.DS_Store
+
+# Archivos temporales de edición de imagen
+logo-chroma.png
+
+# Respaldos locales
+index 2.html
+index-anterior.html
