@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const imgNum = item.getAttribute('data-img');
 
         // Cargar la imagen en alta resolución en el lightbox
-        lightboxImg.src = `public/images/img-${imgNum}.jpg`;
+        lightboxImg.src = `images/img-${imgNum}.jpg`;
 
         // Mostrar el modal y activar la transición
         lightboxModal.style.display = 'flex';
